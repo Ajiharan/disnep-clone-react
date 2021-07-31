@@ -30,16 +30,20 @@ const ImageSlider = () => {
 
 const Carousel = styled(Slider)`
   margin-top: 20px;
+  cursor: pointer;
+  position: relative;
+  button {
+    z-index: 1;
+  }
 
   .slick-list {
     overflow: inherit;
-    border: 3px solid transparent;
   }
   .slick-dots {
     li {
       button {
         &::before {
-          color: white;
+          color: #f2f2f2;
           font-size: 9px;
         }
       }
@@ -51,9 +55,15 @@ const Wrap = styled.div`
   img {
     width: 100%;
     height: 100%;
+    border: 4px solid transparent;
     border-radius: 5px;
     box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px,
       rgb(0 0 0 / 73%) 0px 16px 10px -10px;
+    &:hover {
+      opacity: 0.8;
+      /* border-bottom: 4px solid rgba(249, 249, 249, 0.8); */
+      transition-duration: 300ms;
+    }
   }
 `;
 export default ImageSlider;
