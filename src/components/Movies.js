@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 const Movies = ({ name, movies }) => {
   return (
     <Container>
@@ -8,7 +8,14 @@ const Movies = ({ name, movies }) => {
       <Content>
         {movies.map((movie) => (
           <Wrap key={movie.id}>
-            <img src={movie.cardImg} alt={movie.title} />
+            <Link
+              to={{
+                pathname: `/details/${movie.id}`,
+                state: { movie },
+              }}
+            >
+              <img src={movie.cardImg} alt={movie.title} />
+            </Link>
           </Wrap>
         ))}
       </Content>

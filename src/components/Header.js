@@ -1,34 +1,35 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 const Header = () => {
   return (
     <Nav>
       <Logo src="/images/logo.svg" alt="disnep+" />
       <NavMenu>
-        <a>
+        <Link to="/">
           <img src="/images/home-icon.svg" alt="home" />
           <span>Home</span>
-        </a>
-        <a>
+        </Link>
+        <Link to="/">
           <img src="/images/search-icon.svg" alt="home" />
           <span>Search</span>
-        </a>
-        <a>
+        </Link>
+        <Link to="/">
           <img src="/images/watchlist-icon.svg" alt="home" />
           <span>WatchList</span>
-        </a>
-        <a>
+        </Link>
+        <Link to="/">
           <img src="/images/original-icon.svg" alt="home" />
           <span>Originals</span>
-        </a>
-        <a>
+        </Link>
+        <Link to="/">
           <img src="/images/movie-icon.svg" alt="home" />
           <span>Movies</span>
-        </a>
-        <a>
+        </Link>
+        <Link to="/">
           <img src="/images/series-icon.svg" alt="home" />
           <span>Series</span>
-        </a>
+        </Link>
       </NavMenu>
       <UserImage
         src="https://scontent.fcmb1-2.fna.fbcdn.net/v/t1.6435-1/p240x240/194531794_3960664640721014_1231736119840168866_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=7206a8&_nc_ohc=a5tlk50MFmAAX8JOvWJ&_nc_ht=scontent.fcmb1-2.fna&oh=2730ecbb6a023aeed97a90e26ad8addc&oe=612B6112"
@@ -63,6 +64,8 @@ const NavMenu = styled.div`
     align-items: center;
     padding: 0 14px;
     cursor: pointer;
+    text-decoration: none;
+    color: white;
     /* position: relative; */
     img {
       height: 20px;
