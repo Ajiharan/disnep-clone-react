@@ -1,12 +1,75 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ImageSlider from "./ImageSlider";
+import Movies from "./Movies";
 import Viewers from "./Viewers";
+import { db } from "./Firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { setMovies } from "../features/movie/movieSlice";
+import {
+  selectRecommend,
+  selectNewDisney,
+  selectOriginal,
+  selectTrending,
+} from "../features/movie/movieSlice";
 const Home = () => {
+  const dispatch = useDispatch();
+
+  const recommended = useSelector(selectRecommend);
+  const originalList = useSelector(selectOriginal);
+  const trendingList = useSelector(selectTrending);
+  const newDisneyList = useSelector(selectNewDisney);
+
+  useEffect(() => {
+    let recommend = [];
+    let newDisneys = [];
+    let originals = [];
+    let trending = [];
+    let other = [];
+
+    const sub = db.collection("movies").onSnapshot((snapshot) => {
+      snapshot.docs.map((doc) => {
+        // console.log(doc.data());
+        switch (doc.data().type) {
+          case "recommend":
+            recommend = [...recommend, { ...doc.data(), id: doc.id }];
+            break;
+          case "new":
+            newDisneys = [...newDisneys, { ...doc.data(), id: doc.id }];
+            break;
+          case "original":
+            originals = [...originals, { ...doc.data(), id: doc.id }];
+            break;
+          case "trending":
+            trending = [...trending, { ...doc.data(), id: doc.id }];
+            break;
+          default:
+            other = [...other, { ...doc.data(), id: doc.id }];
+        }
+      });
+      dispatch(
+        setMovies({
+          recommend: recommend,
+          trending: trending,
+          original: originals,
+          newDisney: newDisneys,
+          other: other,
+        })
+      );
+    });
+
+    return () => {
+      sub();
+    };
+  }, []);
+
   return (
     <Container>
       <ImageSlider />
       <Viewers />
+      <Movies name="Recommended for you" movies={recommended} />
+      <Movies name="Originals" movies={originalList} />
+      <Movies name="New" movies={newDisneyList} />
     </Container>
   );
 };
