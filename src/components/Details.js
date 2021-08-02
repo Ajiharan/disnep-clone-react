@@ -24,16 +24,34 @@ const Details = (props) => {
         <AddButton>
           <span>+</span>
         </AddButton>
-        <GroupWatchButton></GroupWatchButton>
+        <GroupWatchButton>
+          <img src="/images/group-icon.png" alt="" />
+        </GroupWatchButton>
       </Controls>
+      <SubTitle>{movie.subTitle}</SubTitle>
+      <Description>{movie.description}</Description>
     </Container>
   );
 };
 
+const SubTitle = styled.div`
+  font-size: 20px;
+  margin: 20px 0;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+`;
+
+const Description = styled.div`
+  font-size: 22px;
+  margin: 20px 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+`;
 const Container = styled.div`
   min-height: calc(100vh - 70px);
   padding: 0 calc(3.5vw + 5px);
   position: relative;
+  top: 120px;
 `;
 
 const Background = styled.div`
@@ -45,8 +63,8 @@ const Background = styled.div`
 
   img {
     opacity: 0.8;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
   }
 `;
@@ -56,10 +74,12 @@ const ImageTitle = styled.div`
   width: 35vw;
   min-height: 170px;
   min-width: 200px;
-
+  margin-bottom: 170px;
+  padding-bottom: 2px;
   img {
-    width: 100%;
-    height: 100%;
+    max-width: 600px;
+    min-width: 200px;
+    width: 35vw;
     object-fit: contain;
   }
 `;
@@ -102,6 +122,7 @@ const AddButton = styled.button`
   background-color: rgba(0, 0, 0, 0.6);
   transition: 200ms all ease-out;
   cursor: pointer;
+  margin-right: 22px;
   span {
     font-size: 30px;
     color: white;
@@ -114,6 +135,11 @@ const AddButton = styled.button`
     }
   }
 `;
-const GroupWatchButton = styled.button``;
+const GroupWatchButton = styled(AddButton)`
+  &:hover {
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+`;
 
 export default Details;
